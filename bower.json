@@ -5,9 +5,6 @@
     "Luke Jensen <luke@polevaultmedia.com>"
   ],
   "description": "Learning how to Bower!",
-  "moduleType": [
-    "amd"
-  ],
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -15,5 +12,6 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "homepage": "https://github.com/bbtb1982/bowertest"
 }
