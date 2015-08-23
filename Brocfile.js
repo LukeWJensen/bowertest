@@ -1,44 +1,44 @@
 //Import some Broccoli plugins
 
 var injectLivereload = require('broccoli-inject-livereload');
-var uglifyJavaScript = require('broccoli-uglify-js');
+var concat = require('broccoli-concat');
+var mergeTrees = require('broccoli-merge-trees');
+var Funnel = require('broccoli-funnel');
+var uglifyJs = require('broccoli-uglify-js');
 var compileSass = require('broccoli-sass');
 var filterCoffeeScript = require('broccoli-coffee');
-var mergeTrees = require('broccoli-merge-trees');
-var vulcanize = require('broccoli-vulcanize-html-imports');
 
 // Specify the Sass and Coffeescript directories
+var projectFiles = 'app';
 var public = injectLivereload('dist');
-var sassDir = 'app/scss';
-var coffeeDir = 'app/coffeescript';
-var templatelDir = 'app/templates';
+var sassFiles = new Funnel(projectFiles, {srcDir:'scss'});
+var coffeeFiles = new Funnel(projectFiles, {srcDir:'coffeescript'});
+var templateFiles = new Funnel( projectFiles, {srcDir:'templates'});
 
-var vulcanizeOptions = {
-    extensions: ['html', 'hbs'],
-    outputFile: 'index.html',
-    overwrite: false,
-    excludes: [/^data:/, /^http[s]?:/, /^\//],
-    abspath: '/Users/lukejensen/Sites/bowertest.com/',
-    stripExcludes: false,
-    stripComments: true,
-    inlineScripts: false,
-    inlineCss: false,
-    implicitStrip: false
-};
 
+
+//js
+var appJS = concat(projectFiles, {
+  inputFiles : ['coffeeScript/**/*.coffee'],
+  outputFile : '/app.coffee',
+  //header     : '/** Concatenated coffeescript to be compiled to javascript **/'
+  }
+);
+var appJS = filterCoffeeScript(appJS);
 var uglifyJsOptions = {
-    mangle: false,
+  mangle: false,
 };
+var appJS = uglifyJs(appJS, uglifyJsOptions);
 
 
 
 
-// Tell Broccoli how we want the assets to be compiled
-var styles = compileSass([sassDir], 'app.scss', 'app.css');
-var coffeeScripts = filterCoffeeScript(coffeeDir);
-var scripts = uglifyJavaScript(coffeeScripts, uglifyJsOptions);
-var templates = vulcanize(templatelDir, vulcanizeOptions);
+// Sass
+var styles = compileSass([sassFiles], 'app.scss', 'app.css');
+
+
+//html
 
 
 // Merge the compiled styles and scripts into one output directory.
-module.exports = mergeTrees([styles, scripts, templates]);
+module.exports = mergeTrees([styles, appJS, templateFiles]);
