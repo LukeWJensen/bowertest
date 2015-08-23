@@ -10,6 +10,12 @@
   "license": "ISC",
   "devDependencies": {
     "broccoli": "~0.16.7",
-    "coffee-script": "~1.9.3"
+    "coffee-script": "~1.9.3",
+    "broccoli-sass": "~0.6.6",
+    "broccoli-coffee": "~0.4.1",
+    "broccoli-merge-trees": "~0.2.3",
+    "broccoli-vulcanize-html-imports": "~1.0.1",
+    "broccoli-inject-livereload": "~0.2.0",
+    "broccoli-uglify-js": "~0.1.3"
   }
 }
