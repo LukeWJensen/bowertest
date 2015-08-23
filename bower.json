@@ -1,0 +1,19 @@
+{
+  "name": "bowertest.com",
+  "version": "0.0.0",
+  "authors": [
+    "Luke Jensen <luke@polevaultmedia.com>"
+  ],
+  "description": "Learning how to Bower!",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "bowertest.com",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "broccoli": "~0.16.7",
+    "coffee-script": "~1.9.3"
+  }
+}
